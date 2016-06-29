@@ -17,6 +17,13 @@ module.exports = {
     if (hook === 'build-webpack') {
       return () => () => {
         rocBuilder.buildConfig.resolve.extensions = ['', '.js', '.json'];
+        rocBuilder.buildConfig.externals = {
+          jsdom: 'window',
+          cheerio: 'window',
+          'react/addons': true,
+          'react/lib/ExecutionEnvironment': true,
+          'react/lib/ReactContext': true,
+        };
         return rocBuilder;
       };
     }
