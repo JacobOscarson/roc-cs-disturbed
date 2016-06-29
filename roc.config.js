@@ -11,4 +11,15 @@ module.exports = {
       routes: 'src/routes/index.js',
     },
   },
+  action: () => (rocObject) => {
+    const hook = rocObject.hook;
+    const rocBuilder = rocObject.previousValue;
+    if (hook === 'build-webpack') {
+      return () => () => {
+        rocBuilder.buildConfig.resolve.extensions = ['', '.js', '.json'];
+        return rocBuilder;
+      };
+    }
+    return null;
+  },
 };
